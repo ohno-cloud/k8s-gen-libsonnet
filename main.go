@@ -49,7 +49,6 @@ func main() {
 	output := cmd.Flags().StringP("output", "o", ".", "directory to put artifacts into")
 
 	cmd.Run = func(cmd *cli.Command, args []string) error {
-		log.Printf("chdir=%v", *changeDir)
 		config := loadConfig(*configFile)
 
 		if docSonnetImport != nil {
