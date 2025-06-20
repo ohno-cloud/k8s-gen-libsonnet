@@ -4,10 +4,10 @@ import (
 	j "github.com/jsonnet-libs/k8s/pkg/builder"
 )
 
-const dPkg = "doc-util/main.libsonnet"
+var DocsonnetPkg = "doc-util/main.libsonnet"
 
 func Import() j.Type {
-	return j.Local(j.Import("d", dPkg))
+	return j.Local(j.Import("d", DocsonnetPkg))
 }
 
 func Args(s ...string) []j.Type {

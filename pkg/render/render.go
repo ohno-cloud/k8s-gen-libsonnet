@@ -19,6 +19,8 @@ const (
 	MainFile     = "main" + GenExt
 )
 
+var RenderSelfMixin = true
+
 // Index creates gen.libsonnet, the index of all generated artifacts
 func Index(groups map[string]model.Group, name, repo, dir, description string) j.ObjectType {
 	fields := []j.Type{
@@ -139,11 +141,13 @@ func Kind(name string, k model.Kind) j.ObjectType {
 
 	SortFields(fields)
 
-	// mixin field for compatibility (patch to avoid recursive result)
-	fields = append(fields,
-		j.String("#mixin", "ignore"),
-		j.Ref("mixin", "self"),
-	)
+	if RenderSelfMixin {
+		// mixin field for compatibility (patch to avoid recursive result)
+		fields = append(fields,
+			j.String("#mixin", "ignore"),
+			j.Ref("mixin", "self"),
+		)
+	}
 	return j.Object(name, fields...)
 }
 

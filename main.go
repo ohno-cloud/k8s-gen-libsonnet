@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-clix/cli"
 	"github.com/google/go-jsonnet/formatter"
+	"github.com/jsonnet-libs/k8s/pkg/builder/docsonnet"
 	"github.com/jsonnet-libs/k8s/pkg/model"
 	"github.com/jsonnet-libs/k8s/pkg/render"
 	"github.com/jsonnet-libs/k8s/pkg/swagger"
@@ -41,12 +42,27 @@ func main() {
 	}
 
 	configFile := cmd.Flags().StringP("config", "c", "config.yml", "YAML configuration file")
+	changeDir := cmd.Flags().Bool("chdir", true, "Change directory to the config file")
+	docSonnetImport := cmd.Flags().String("doc-import", "doc-util/main.libsonnet", "Import path for docsonnet")
+	renderSelfMixin := cmd.Flags().Bool("mixin-self", true, "Render mixin self")
+	quiet := cmd.Flags().BoolP("quiet", "q", false, "Reduce terminal output")
 	output := cmd.Flags().StringP("output", "o", ".", "directory to put artifacts into")
 
 	cmd.Run = func(cmd *cli.Command, args []string) error {
+		log.Printf("chdir=%v", *changeDir)
 		config := loadConfig(*configFile)
 
-		os.Chdir(filepath.Dir(*configFile))
+		if docSonnetImport != nil {
+			docsonnet.DocsonnetPkg = *docSonnetImport
+		}
+
+		if renderSelfMixin != nil {
+			render.RenderSelfMixin = *renderSelfMixin
+		}
+
+		if *changeDir {
+			os.Chdir(filepath.Dir(*configFile))
+		}
 
 		for _, t := range config.Specs {
 			if len(args) > 0 && !hasStr(args, t.Output) {
@@ -57,7 +73,9 @@ func main() {
 
 			if len(t.Crds) > 0 {
 				for _, url := range t.Crds {
-					log.Printf("Generating '%s' from '%s, %s'", t.Output, url, t.Prefix)
+					if !*quiet {
+						log.Printf("Generating '%s' from '%s, %s'", t.Output, url, t.Prefix)
+					}
 
 					defs, err := swagger.Load(&swagger.CRDLoader{}, url)
 					if err != nil {
@@ -69,7 +87,9 @@ func main() {
 				}
 
 			} else {
-				log.Printf("Generating '%s' from '%s, %s'", t.Output, t.Openapi, t.Prefix)
+				if !*quiet {
+					log.Printf("Generating '%s' from '%s, %s'", t.Output, t.Openapi, t.Prefix)
+				}
 
 				d, err := swagger.Load(&swagger.SwaggerLoader{}, t.Openapi)
 				if err != nil {
