@@ -9,10 +9,10 @@ import (
 
 	"github.com/go-clix/cli"
 	"github.com/google/go-jsonnet/formatter"
-	"github.com/jsonnet-libs/k8s/pkg/builder/docsonnet"
-	"github.com/jsonnet-libs/k8s/pkg/model"
-	"github.com/jsonnet-libs/k8s/pkg/render"
-	"github.com/jsonnet-libs/k8s/pkg/swagger"
+	"github.com/ohno-cloud/k8s-gen-libsonnet/pkg/builder/docsonnet"
+	"github.com/ohno-cloud/k8s-gen-libsonnet/pkg/model"
+	"github.com/ohno-cloud/k8s-gen-libsonnet/pkg/render"
+	"github.com/ohno-cloud/k8s-gen-libsonnet/pkg/swagger"
 	"gopkg.in/yaml.v2"
 )
 

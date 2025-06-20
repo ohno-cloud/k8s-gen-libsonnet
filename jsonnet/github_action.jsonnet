@@ -1,5 +1,5 @@
-local onMaster = { 'if': "${{ github.ref == 'refs/heads/master' && github.repository == 'jsonnet-libs/k8s' }}" };
-local notFork = { 'if': "github.event.pull_request.head.repo.full_name == 'jsonnet-libs/k8s'" };
+local onMaster = { 'if': "${{ github.ref == 'refs/heads/master' && github.repository == 'ohno-cloud/k8s-gen-libsonnet' }}" };
+local notFork = { 'if': "github.event.pull_request.head.repo.full_name == 'ohno-cloud/k8s-gen-libsonnet'" };
 
 local terraform = {
   job: {
@@ -95,7 +95,7 @@ local libJob(name) = {
         GIT_COMMITTER_NAME: 'jsonnet-libs-bot',
         GIT_COMMITTER_EMAIL: '86770550+jsonnet-libs-bot@users.noreply.github.com',
         SSH_KEY: '${{ secrets.DEPLOY_KEY }}',
-        GEN_COMMIT: "${{ github.ref == 'refs/heads/master' && github.repository == 'jsonnet-libs/k8s' }}",
+        GEN_COMMIT: "${{ github.ref == 'refs/heads/master' && github.repository == 'ohno-cloud/k8s-gen-libsonnet' }}",
         DIFF: 'true',
       },
     },

@@ -1,7 +1,7 @@
 # k8s-libsonnet
 
 This repository contains artifacts of the `k8s-libsonnet` Jsonnet Kubernetes library.
-It is generated with `k8s-gen`, located at https://github.com/jsonnet-libs/k8s.
+It is generated with `k8s-gen`, located at https://github.com/ohno-cloud/k8s-gen-libsonnet.
 
 ## Usage
 
@@ -17,13 +17,13 @@ For more info, refer to the Tanka tutorial at https://tanka.dev/tutorial/k-lib.
 #### Standalone
 
 ```bash
-$ jb install github.com/jsonnet-libs/k8s-libsonnet/%(version)s@main
+$ jb install github.com/ohno-cloud/k8s-gen-libsonnet-libsonnet/%(version)s@main
 ```
 
 Then import it in your project:
 
 ```jsonnet
-local k = import "github.com/jsonnet-libs/k8s-libsonnet/%(version)s/main.libsonnet"
+local k = import "github.com/ohno-cloud/k8s-gen-libsonnet-libsonnet/%(version)s/main.libsonnet"
 ```
 
 ## FAQ
@@ -37,7 +37,7 @@ The API aims to be very similar to `ksonnet-gen`, but not 100%% the same, to
 allow enough room for important improvements.
 
 If something does not look as expected, please open an issue at
-https://github.com/jsonnet-libs/k8s
+https://github.com/ohno-cloud/k8s-gen-libsonnet
 
 #### Shall I use it?
 
@@ -82,7 +82,7 @@ While working on it, we quickly realized that the overall code complexity,
 performance and correctness is far from what we desire and decided to switch
 efforts to rewriting it from scratch.
 
-The result of that is https://github.com/jsonnet-libs/k8s and expected to
+The result of that is https://github.com/ohno-cloud/k8s-gen-libsonnet and expected to
 replace both, https://github.com/ksonnet/ksonnet-gen and
 https://github.com/kube-jsonnet/k as soon as possible.
 
@@ -92,4 +92,4 @@ The generated docs can be found here: https://jsonnet-libs.github.io/k8s-libsonn
 
 #### I found a bug, where can I report this?
 
-Great, let's try and fix that, please report issues in https://github.com/jsonnet-libs/k8s.
+Great, let's try and fix that, please report issues in https://github.com/ohno-cloud/k8s-gen-libsonnet.

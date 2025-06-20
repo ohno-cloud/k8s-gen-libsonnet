@@ -1,7 +1,7 @@
 package docsonnet
 
 import (
-	j "github.com/jsonnet-libs/k8s/pkg/builder"
+	j "github.com/ohno-cloud/k8s-gen-libsonnet/pkg/builder"
 )
 
 var DocsonnetPkg = "doc-util/main.libsonnet"
