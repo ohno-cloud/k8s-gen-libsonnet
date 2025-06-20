@@ -4,6 +4,8 @@ go 1.24.0
 
 toolchain go1.24.4
 
+replace github.com/jsonnet-libs/k8s => ./
+
 require (
 	github.com/fatih/camelcase v1.0.0
 	github.com/go-clix/cli v0.2.0
@@ -20,7 +22,6 @@ require (
 	github.com/fxamacker/cbor/v2 v2.8.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
